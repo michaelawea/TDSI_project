@@ -170,28 +170,36 @@ def main():
 
     # --- 训练循环 ---
     for epoch in range(NUM_EPOCHS):
+        # 清理GPU缓存，避免内存碎片累积
+        if DEVICE == "cuda":
+            torch.cuda.empty_cache()
+
         model.train()
         progress_bar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{NUM_EPOCHS}")
         total_loss = 0.0
-        
+
         for lr_images, hr_images in progress_bar:
             lr_images = lr_images.to(DEVICE)
             hr_images = hr_images.to(DEVICE)
-            
+
             # 前向传播
             optimizer.zero_grad()
             sr_images = model(lr_images)
-            
+
             # 计算损失
             loss = criterion(sr_images, hr_images)
-            
+
             # 反向传播和优化
             loss.backward()
             optimizer.step()
-            
+
             total_loss += loss.item()
             progress_bar.set_postfix(loss=f"{loss.item():.4f}")
-            
+
+        # Epoch结束后再次清理GPU缓存
+        if DEVICE == "cuda":
+            torch.cuda.empty_cache()
+
         avg_loss = total_loss / len(train_loader)
         print(f"Epoch {epoch+1} 结束, 平均损失: {avg_loss:.4f}")
 
