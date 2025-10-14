@@ -1,0 +1,5 @@
+nohup: ignoring input
+Input Notebook:  train_patch_debug.ipynb
+Output Notebook: out_train_patch_debug_2025-10-14_1306.ipynb
+Executing:   0%|                                                                                      | 0/26 [00:00<?, ?cell/s]Executing notebook with kernel: python3
+Executing:   4%|███                                                                           | 1/26 [00:02<00:53,  2.14s/cell]Executing:   8%|██████                                                                        | 2/26 [00:05<01:14,  3.11s/cell]Executing:  23%|██████████████████                                                            | 6/26 [00:06<00:16,  1.23cell/s]Executing:  38%|█████████████████████████████▌                                               | 10/26 [00:06<00:06,  2.50cell/s]
