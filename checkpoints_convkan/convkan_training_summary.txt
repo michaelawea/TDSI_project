@@ -1,0 +1,40 @@
+
+ConvKAN Super-Resolution Training Summary
+============================================================
+
+Model Architecture:
+  Type: ConvKAN with PixelShuffle Upsampling
+  Base Filters: 16
+  Residual Blocks: 2
+  Upscale Factor: 2×
+  Total Parameters: 189,235
+
+Training Configuration:
+  Epochs: 50
+  Batch Size: 1
+  Learning Rate: 0.0001
+  Loss Function: L1 Loss (MAE)
+  Optimizer: AdamW with weight decay
+  Mixed Precision: Enabled
+
+Dataset:
+  Total Images: 1000
+  Training: 900 images
+  Validation: 100 images
+  Input Size: 128×128 (network processes here)
+  Output Size: 256×256 (via PixelShuffle)
+
+Final Results:
+  Best Validation Loss: 0.003870
+  Best Epoch: 48
+  Final Train Loss: 0.004818
+
+Saved Files:
+  Best Model: checkpoints_convkan/convkan_best.pth
+  Training Curve: checkpoints_convkan/convkan_training_curve.png
+
+Notes:
+  - Uses PixelShuffle architecture for memory efficiency
+  - Processes at 128×128, upsamples to 256×256
+  - Separate from U-Net model (different checkpoint directory)
+  - Ready for evaluation with evaluate_convkan.ipynb
